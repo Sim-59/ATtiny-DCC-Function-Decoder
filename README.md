@@ -1,4 +1,4 @@
-# Einfacher DCC Funktionsdekoder mit ATtiny85 
+# Einfacher DCC-Funktionsdekoder mit ATtiny85 
 ## Ursprungs-Version
 Die Dekoder-Software für die Arduino wurde abgeleitet von einem Sketch, der für ein kleines Digispark-Board mit ATtiny85 entworfen wurde.\
 https://jo-fri.github.io/Eisenbahn/DCC_ATtiny85/index.html
