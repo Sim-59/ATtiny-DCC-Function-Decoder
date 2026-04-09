@@ -24,5 +24,4 @@ Es sind Konfigurationsvariablen vorhanden:
 - CV29 - Konfigurationsbyte, default 2 - wie bei Loks mit 28/128 Fahrstufen
   - Bit0 - dreht die Richtungsinformation des Wagens um
 
-Einsatzbeispiel in einer Lichtleiste als Ersatz für eine Beleuchtung in einem Modellbahnwagen:\
-https://simandit.de/simwiki/doku.php?id=modellbahn:umbauten:rekowagen
+Einsatzbeispiel in einer Lichtleiste als Ersatz für bisherige Beleuchtung in einem [Modellbahnwagen](https://simandit.de/simwiki/doku.php?id=modellbahn:umbauten:rekowagen)
