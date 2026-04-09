@@ -10,8 +10,8 @@ Die Hardware wurde so modifiziert, so dass der Dekoder auf dem Programmiergleis 
 Weiterhin wurden einige Zusatzkonfigurationen eingefügt.
 
 Folgende Funktionen sind möglich:
-- F0 schaltet richtungsabhängig Rücklichter der einen Seite
-- F3 schaltet richtungsabhängig Rücklichter der anderen Seite
+- F0 schaltet richtungsabhängig Beleuchtung der einen Richtung (z.B. Schlusslicht einer Seite)
+- F3 schaltet richtungsabhängig Beleuchtung der entgegengesetzten Richtung (z.B. Schlusslicht der anderen Seite)
 - F1 schaltet die Innenraumbeleuchtung
 
 Es sind Konfigurationsvariablen vorhanden:
