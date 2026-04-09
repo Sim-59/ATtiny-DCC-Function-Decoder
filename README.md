@@ -3,7 +3,7 @@
 Die Dekoder-Software für die Arduino wurde abgeleitet von einem Sketch, der für ein kleines Digispark-Board mit ATtiny85 entworfen wurde.\
 https://jo-fri.github.io/Eisenbahn/DCC_ATtiny85/index.html
 
-Der Sketch verwendet die NmraDcc-Bibliothek von http://mrrwa.org/, die über die Arduino-Bibliotheksverwaltung eingebunden werden kann.
+Der Sketch verwendet die [NmraDcc-Bibliothek](https://github.com/mrrwa/NmraDcc) von [MRRWA](http://mrrwa.org/), die über die Arduino-Bibliotheksverwaltung eingebunden werden kann.
 
 ## Modifizierte Version
 Die Hardware wurde so modifiziert, so dass der Dekoder auf dem Programmiergleis programmiert und auch gelesen werden kann. Es wird an einem Ausgang dafür das ACK-Signal erzeugt. Damit sind 3 Ausgänge nutzbar.
