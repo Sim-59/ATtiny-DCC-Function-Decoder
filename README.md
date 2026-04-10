@@ -8,12 +8,13 @@ Der Sketch verwendet die [NmraDcc-Bibliothek](https://github.com/mrrwa/NmraDcc) 
 ## Modifizierte Version
 Für den Einsatz in einer Lichtleiste als Ersatz für bisherige Beleuchtung in einem [Modellbahnwagen](https://simandit.de/simwiki/doku.php?id=modellbahn:umbauten:rekowagen) habe ich die Hardware so modifiziert, so dass der Dekoder auf dem Programmiergleis programmiert und auch gelesen werden kann. Es wird an einem Ausgang dafür das ACK-Signal erzeugt. Damit sind jedoch nur drei der in der Ursprungsversion verfügbaren vier Ausgänge nutzbar.  
 Auf der Beleuchtungsplatine ist ein Steckverbinder für einen ISP-Programmer vorhanden, damit kann auf den Bootloader wie beim Digispark-Board verzichtet werden.  
-olgende Funktionen sind möglich:
+
+Folgende Funktionen sind möglich:
 - F0 schaltet richtungsabhängig Beleuchtung der einen Richtung (z.B. Schlusslicht einer Seite)
 - F3 schaltet richtungsabhängig Beleuchtung der entgegengesetzten Richtung (z.B. Schlusslicht der anderen Seite)
 - F1 schaltet die Innenraumbeleuchtung
 
-Weiterhin wurden einige Zusatzkonfigurationen eingefügt. Es sind Konfigurationsvariablen vorhanden:  
+Weiterhin wurden Zusatzkonfigurationen mit den folgenden CVs ergänzt:  
 - CV1 - DCC-Adresse, default 3
 - CV8 - Schreiben darauf erzeugt ein Reset auf Default-Einstellungen
 - CV21 - Lichtkonfiguration, default 0
