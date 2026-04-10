@@ -6,7 +6,9 @@ https://jo-fri.github.io/Eisenbahn/DCC_ATtiny85/index.html
 Der Sketch verwendet die [NmraDcc-Bibliothek](https://github.com/mrrwa/NmraDcc) von [MRRWA](http://mrrwa.org/), die über die Arduino-Bibliotheksverwaltung eingebunden werden kann.
 
 ## Modifizierte Version
-Die Hardware wurde so modifiziert, so dass der Dekoder auf dem Programmiergleis programmiert und auch gelesen werden kann. Es wird an einem Ausgang dafür das ACK-Signal erzeugt. Damit sind 3 Ausgänge nutzbar.
+Für den Einsatz in einer Lichtleiste als Ersatz für bisherige Beleuchtung in einem [Modellbahnwagen](https://simandit.de/simwiki/doku.php?id=modellbahn:umbauten:rekowagen) habe ich die Hardware so modifiziert, so dass der Dekoder auf dem Programmiergleis programmiert und auch gelesen werden kann. Es wird an einem Ausgang dafür das ACK-Signal erzeugt. 
+Auf der Beleuchtungsplatine ist ein Steckverbinder für einen ISP-Programmer vorhanden, damit kann auf den Bootloader verzichtet werden.  
+Damit sind jedoch nur drei der in der Ursprungsversion verfügbaren vier Ausgänge nutzbar.  
 Weiterhin wurden einige Zusatzkonfigurationen eingefügt.
 
 Folgende Funktionen sind möglich:
@@ -24,4 +26,4 @@ Es sind Konfigurationsvariablen vorhanden:
 - CV29 - Konfigurationsbyte, default 2 - wie bei Loks mit 28/128 Fahrstufen
   - Bit0 - dreht die Richtungsinformation des Wagens um
 
-Einsatzbeispiel in einer Lichtleiste als Ersatz für bisherige Beleuchtung in einem [Modellbahnwagen](https://simandit.de/simwiki/doku.php?id=modellbahn:umbauten:rekowagen)
+
