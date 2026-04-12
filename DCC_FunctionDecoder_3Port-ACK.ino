@@ -257,7 +257,7 @@ void notifyDccFunc(uint16_t Addr, DCC_ADDR_TYPE AddrType, FN_GROUP FuncGrp, uint
             if (cv35_f1map & 0x02) digitalWrite(LR_PIN, !richtung && (FuncState & FN_BIT_01));          // PB4 bei F1 in Fahrrichtung rückwärts, wenn nicht deaktiviert in CV50
             if (cv36_f2map & 0x02) digitalWrite(LR_PIN, !richtung && (FuncState & FN_BIT_02) >> 1);     // PB4 bei F2 in Fahrrichtung rückwärts, wenn nicht deaktiviert in CV50
             if (cv37_f3map & 0x02) digitalWrite(LR_PIN, !richtung && (FuncState & FN_BIT_03) >> 2);     // PB4 bei F3 in Fahrrichtung rückwärts, wenn nicht deaktiviert in CV50
-            if (cv38_f4map & 0x80) digitalWrite(LR_PIN, !richtung && (FuncState & FN_BIT_03) >> 2);     // PB4 bei F3 in Fahrrichtung rückwärts, wenn nicht deaktiviert in CV50
+            if (cv38_f4map & 0x80) digitalWrite(LR_PIN, !richtung && (FuncState & FN_BIT_04) >> 3);     // PB4 bei F4 in Fahrrichtung rückwärts, wenn nicht deaktiviert in CV50
           }
         } else {
           if (cv34_f0r_map & 0x02) digitalWrite(LR_PIN, (FuncState & FN_BIT_00) >> 4);                  // PB4 bei F0 in beiden Fahrtrichtungen
