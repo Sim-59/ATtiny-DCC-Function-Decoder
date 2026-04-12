@@ -10,18 +10,23 @@ Für den Einsatz in einer Lichtleiste als Ersatz für bisherige Beleuchtung in e
 Auf der Beleuchtungsplatine ist ein Steckverbinder für einen ISP-Programmer vorhanden, damit kann auf den Bootloader wie beim Digispark-Board verzichtet werden.  
 
 Folgende Funktionen sind möglich:
-- F0 schaltet richtungsabhängig Beleuchtung der einen Richtung (z.B. Schlusslicht einer Seite)
-- F3 schaltet richtungsabhängig Beleuchtung der entgegengesetzten Richtung (z.B. Schlusslicht der anderen Seite)
+- F0 schaltet richtungsabhängig Beleuchtung der beider Seiten (z.B. Schlusslichter)
 - F1 schaltet die Innenraumbeleuchtung
 
 Weiterhin wurden Zusatzkonfigurationen mit den folgenden CVs ergänzt:  
-- CV1 - DCC-Adresse, default 3
-- CV8 - Schreiben darauf erzeugt ein Reset auf Default-Einstellungen
-- CV21 - Lichtkonfiguration, default 0
-  - Bit7 (Wert 128) unterdrückt die Richtungsinformation, aktivierte Funktion immer an
-  - Bit3 (Wert 8) unterdrückt F3-Funktion, LEDs an dieser Funktion immer aus
-  - Bit0 (Wert 1) unterdrückt F0-Funktion, LEDs an dieser Funktion immer aus
-- CV29 - Konfigurationsbyte, default 2 - wie bei Loks mit 28/128 Fahrstufen
-  - Bit0 - dreht die Richtungsinformation des Wagens um
+ 
+- CV1  DCC-Adresse, default 3   
+- CV8  Schreiben führt einen Decoder Reset mit Default-Werten aus
+- CV29 Konfigurationsbyte, default 2
+  - Bit0=1 Richtungsumkehr
+- CV33-CV46 Funktionsmapping für Innenbeleuchtung F0-F12, default F1 (CV35=4)
+  - CV33 default 1, F0-Vorwärts steuert PB0 (Schlusslicht Vorwärtsfahrt)
+  - CV34 default 2, F0-Rückwärts steuert PB4 (Schlusslicht Rückwärtsfahrt), Mapping auf F1 ... F4 möglich
+  - CV35 default 4, F1 steuert PB1 (Innenbeleuchtung), Mapping auf F0 ... F12 möglich
+- CV49, CV50 für Steuerung der Schlussbeleuchtung
+  - Bit7=1 immer an
+  - Bit6=1 aus, wenn vorwärts
+  - Bit5=1 aus, wenn rückwärts
+
 
 
