@@ -10,8 +10,8 @@ Für den Einsatz in einer Lichtleiste als Ersatz für bisherige Beleuchtung in e
 Auf der Beleuchtungsplatine ist ein Steckverbinder für einen ISP-Programmer vorhanden, damit kann auf den Bootloader wie beim Digispark-Board verzichtet werden.  
 
 Folgende Funktionen sind möglich:
-- F0 schaltet richtungsabhängig Beleuchtung der beider Seiten (z.B. Schlusslichter)
-- F1 schaltet die Innenraumbeleuchtung
+- F0 schaltet richtungsabhängig PB0 und PB4 (z.B. Schlusslichter beider Seiten)
+- F1 schaltet PB1 (z.B. Innenraumbeleuchtung)
 
 Weiterhin wurden Zusatzkonfigurationen mit den folgenden CVs ergänzt:  
  
@@ -19,7 +19,7 @@ Weiterhin wurden Zusatzkonfigurationen mit den folgenden CVs ergänzt:
 - CV8  Schreiben führt einen Decoder Reset mit Default-Werten aus
 - CV29 Konfigurationsbyte, default 2
   - Bit0=1 Richtungsumkehr
-- CV33-CV46 Funktionsmapping für Innenbeleuchtung F0-F12, default F1 (CV35=4)
+- CV33-CV46 Funktionsmapping für Innenbeleuchtung F0-F12
   - CV33 default 1, F0-Vorwärts steuert PB0 (Schlusslicht Vorwärtsfahrt)
   - CV34 default 2, F0-Rückwärts steuert PB4 (Schlusslicht Rückwärtsfahrt), Mapping auf F1 ... F4 möglich
   - CV35 default 4, F1 steuert PB1 (Innenbeleuchtung), Mapping auf F0 ... F12 möglich
