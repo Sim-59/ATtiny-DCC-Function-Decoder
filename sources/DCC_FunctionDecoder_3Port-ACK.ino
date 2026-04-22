@@ -235,7 +235,7 @@ void setup() {
   // Setup which External Interrupt, the Pin it's associated with that we're using and enable the Pull-Up
   Dcc.pin(0, DCC_PIN, 0);
   // Call the main DCC Init function to enable the DCC Receiver
-  Dcc.init(MAN_ID_DIY, 10, FLAGS_MY_ADDRESS_ONLY, 0);  // mit FLAGS... werden nur eigene Adressen angenommen
+  Dcc.init(MAN_ID_DIY, 20, FLAGS_MY_ADDRESS_ONLY, 0);  // mit FLAGS... werden nur eigene Adressen angenommen
 }
 
 void loop() {
