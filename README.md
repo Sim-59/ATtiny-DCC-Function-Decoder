@@ -18,12 +18,16 @@ Folgende Funktionen sind möglich:
   - PB4 kann auf eine andere Funktionstaste gemappt und damit einzeln geschaltet werden
 - F1 schaltet PB1 (z.B. Innenraumbeleuchtung)
 
-Weiterhin wurden Zusatzkonfigurationen mit den folgenden CVs ergänzt:  
- 
-- CV1  DCC-Adresse, default 3   
-- CV8  Schreiben führt einen Decoder Reset mit Default-Werten aus
-- CV29 Konfigurationsbyte, default 2
+Jetzt sind folgenden Konfigurationsvariablen (CVs) sind vorhanden:  
+- CV1 DCC-Adresse, default 3 
+- CV7 Versionsnummer
+- CV8 Hersteller-ID
+  - Schreiben auf CV8 führt einen Decoder Reset mit Default-Werten aus
+- CV17/CV18 erweiterte DCC-Adresse (zusammen mit CV29-Bit5)
+- CV29 Konfigurationsbyte
   - Bit0=1 Richtungsumkehr
+  - Bit1=1 28/128 Fahrstufen (default
+  - Bit5=1 erweiterte Adresse nutzen
 - CV33-CV46 Funktionsmapping für Innenbeleuchtung F0-F12
   - CV33 default 1, F0-Vorwärts steuert PB0 (Ausgang Vorwärtsfahrt)
   - CV34 default 2, F0-Rückwärts steuert PB4 (Ausgang Rückwärtsfahrt), Mapping auf F1 ... F4 möglich
