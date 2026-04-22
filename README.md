@@ -8,7 +8,7 @@ Der Sketch verwendet die [NmraDcc-Bibliothek](https://github.com/mrrwa/NmraDcc) 
 Zum Digispark-Board wurde von mir eine kleine [Zusatzplatine](http://simandit.de/simwiki/doku.php?id=modellbahn:umbauten:dcc-dekoder#funktions-dekoder_mit_digispark-board) entwickelt, mit der die Anschaltung an das Gleissignal erfolgt. Dies enthält weiterhin 3 Transistoren für die Funktionsausgänge, um z.B. die gleichgerichtete Gleisspannung zu schalten, und ein 4. Transistor zur Erzeugung des ACK-Signals. Damit sind jedoch nur noch drei der in der Ursprungsversion verfügbaren vier Ausgänge nutzbar. 
 
 ## Modifizierte Version
-Für den Einsatz in einer LED-Lichtleiste als Ersatz für die vorhandene Beleuchtung mit zwei Birnchen in einem [Modellbahnwagen](https://simandit.de/simwiki/doku.php?id=modellbahn:umbauten:rekowagen) habe ich die Dekoder-Hardware mit auf die Beleuchtungsplatine gebracht. Der Wagen ist auf dem Programmiergleis konfigurierbar.   
+Für den Einsatz in einer LED-Lichtleiste als Ersatz für die vorhandene Beleuchtung mit zwei Birnchen in einem [PIKO-DR-Rekowagen](https://simandit.de/simwiki/doku.php?id=modellbahn:umbauten:rekowagen) habe ich die Dekoder-Hardware mit auf die Beleuchtungsplatine gebracht. Der Wagen ist auf dem Programmiergleis konfigurierbar.   
 Auf der Beleuchtungsplatine ist ein Steckverbinder für einen ISP-Programmer vorhanden, damit kann auf den Bootloader wie beim Digispark-Board verzichtet werden, was Speicherplatz und Bootzeit spart.
 
 Einen Dekoder mit dem Digispark-Board und der Zusatzplatine habe ich in einem [Packwagen](https://simandit.de/simwiki/doku.php?id=modellbahn:umbauten:pwg-daa) eingebaut.
