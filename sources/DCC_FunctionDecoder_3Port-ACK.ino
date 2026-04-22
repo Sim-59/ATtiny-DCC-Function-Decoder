@@ -1,4 +1,4 @@
-//  Ergänzungen - basierend auf unten veröffentlichtem Sketch                           MiHo 2026-04-12
+//  Ergänzungen - basierend auf unten veröffentlichtem Sketch                           MiHo 2026-04-22
 //  https://simandit.de/simwiki/doku.php?id=modellbahn:umbauten:dcc-dekoder
 //  ACK-Rückmeldung für CV-Programmierung/CV-Lesen (PT) Hardware/Funktion hinzugefügt
 //  Funktion F2 an PB3 entfällt dafür
@@ -6,6 +6,7 @@
 //  F0 schaltet richtungsabhängig die Schlusslichter (Richtung konfigurierbar mit CV29) 
 //  Schlusslicht rückwärts kann mit Funktionsmapping von F0-R auf F1 ... F4 gelegt werden
 //  Innenbeleuchtung kann mit Funktionsmapping auf F0 ... F12 gelegt werden
+//  Ausgänge können gedimmt werden
 //
 //  CV1 = Dekoder-Adresse, default 3
 //  CV8 -> Schreiben erzeugt Dekoder-Reset
@@ -21,10 +22,13 @@
 //      Bit7=1 immer an
 //      Bit6=1 aus, wenn vorwärts
 //      Bit5=1 aus, wenn rückwärts
+//  CV51, CV52, CV53 Dimmwert, default 15
+//      Bit0 ... Bit4  (0 ... 31) 1=dunkel bis 31=volle Helligkeit, 0 wird auf 1 gesetzt
+//
 //  Erst-Initialisierung bei unprogrammiertem EEPROM
 //  -----------------
 //
-//  Anpassung an Arduino Digispark ATtiny85                                  JoFri 2024-08-12
+//  Ausgangs-Idee - Arduino Digispark ATtiny85                                  JoFri 2024-08-12
 //  https://jo-fri.github.io/Eisenbahn/DCC_ATtiny85/
 //
 //  benötigt wird die NmraDcc-master.zip  <NmraDcc.h> 
@@ -86,8 +90,11 @@
 //    Bit6 (64) aus, wenn vorwärts
 //    Bit5 (32) aus, wenn rückwärts
 
-#define CV_PB0_MODE  49   // Schlusslicht vorwärts
-#define CV_PB4_MODE  50   // Schlusslicht rückwärts
+#define CV_PB0_MODE  49   // Effekte PB0 (Licht Vorwärtsfahrt)
+#define CV_PB4_MODE  50   // Effekte PB4 (Licht Rückwärtsfahrt)
+#define CV_PB0_DIM   51   // Dimmwert PB0 (Licht Vorwärtsfahrt)
+#define CV_PB4_DIM   52   // Dimmwert PB4 (Licht Rückwärtsfahrt)
+#define CV_PB1_DIM   53   // Dimmwert PB1 (Innenbeleuchtung)
 
 #define CV_F0_F_MAP  33
 #define CV_F0_R_MAP  34
@@ -108,10 +115,12 @@
 #define F0_R_MAP_DEFAULT 2
 #define F1_MAP_DEFAULT   4
 
+
 boolean richtung = false;        // Fahrtrichtungsauswertung
-uint8_t cv29_byte, cv49_pb0_cfg, cv50_pb4_cfg;
+uint8_t cv29_byte, cv_pb0_cfg, cv_pb4_cfg;
 uint8_t cv33_f0f_map, cv34_f0r_map, cv35_f1map, cv36_f2map, cv37_f3map, cv38_f4map, cv39_f5map, cv40_f6map;
 uint8_t cv41_f7map, cv42_f8map, cv43_f9map, cv44_f10map, cv45_f11map, cv46_f12map;
+uint8_t cv_pb0_dim, cv_pb4_dim, cv_pb1_dim;
 
 NmraDcc Dcc;
 DCC_MSG Packet;
@@ -145,6 +154,9 @@ CVPair FactoryDefaultCVs[] = {
   {CV_F12_MAP, 0},
   {CV_PB0_MODE, 0},
   {CV_PB4_MODE, 0},
+  {CV_PB0_DIM, 15},
+  {CV_PB4_DIM, 15},
+  {CV_PB1_DIM, 15},
 
 // ONLY uncomment 1 CV_29_CONFIG line below as approprate
 //  {CV_29_CONFIG,                                      0},   // Short Address 14 Speed Steps
@@ -187,8 +199,8 @@ void setup() {
   }
   cv29_byte = Dcc.getCV(CV_29_CONFIG);
 
-  cv49_pb0_cfg = Dcc.getCV(CV_PB0_MODE);
-  cv50_pb4_cfg = Dcc.getCV(CV_PB4_MODE);
+  cv_pb0_cfg = Dcc.getCV(CV_PB0_MODE);
+  cv_pb4_cfg = Dcc.getCV(CV_PB4_MODE);
 
   cv33_f0f_map = Dcc.getCV(CV_F0_F_MAP);
   cv34_f0r_map = Dcc.getCV(CV_F0_R_MAP);
@@ -205,6 +217,21 @@ void setup() {
   cv45_f11map = Dcc.getCV(CV_F11_MAP);
   cv46_f12map = Dcc.getCV(CV_F12_MAP);
 
+  cv_pb0_dim = Dcc.getCV(CV_PB0_DIM);
+  if (cv_pb0_dim < 1) cv_pb0_dim = 1;
+  if (cv_pb0_dim > 31) cv_pb0_dim = 31;
+  cv_pb0_dim = cv_pb0_dim << 3;
+
+  cv_pb4_dim = Dcc.getCV(CV_PB4_DIM);
+  if (cv_pb4_dim < 1) cv_pb4_dim = 1;
+  if (cv_pb4_dim > 31) cv_pb4_dim = 31;
+  cv_pb4_dim = cv_pb4_dim << 3;
+
+  cv_pb1_dim = Dcc.getCV(CV_PB1_DIM);
+  if (cv_pb1_dim < 1) cv_pb1_dim = 1;
+  if (cv_pb1_dim > 31) cv_pb1_dim = 31;
+  cv_pb1_dim = cv_pb1_dim << 3;
+ 
   // Setup which External Interrupt, the Pin it's associated with that we're using and enable the Pull-Up
   Dcc.pin(0, DCC_PIN, 0);
   // Call the main DCC Init function to enable the DCC Receiver
@@ -248,51 +275,51 @@ void notifyDccSpeed(uint16_t Addr, DCC_ADDR_TYPE AddrType, uint8_t speed, DCC_DI
 void notifyDccFunc(uint16_t Addr, DCC_ADDR_TYPE AddrType, FN_GROUP FuncGrp, uint8_t FuncState) {
     switch (FuncGrp) {
       case FN_0_4:
-        if ((cv49_pb0_cfg & 0x80) == 0) {                                                               // CV49-Bit7 = 1 schaltet für PB0 die Richtungserkennung aus
-          if ((((cv29_byte & 0x01) == 0) && ((cv49_pb0_cfg & 0x40) == 0)) || (((cv29_byte & 0x01) == 1) && ((cv49_pb0_cfg & 0x20) == 0))) {   // Bei Richtungs-Invertierung auch die Richtungs-Bits in CV49 wechseln
-            digitalWrite(LF_PIN, richtung && (FuncState & FN_BIT_00) >> 4);                             // PB0 bei F0 in Fahrrichtung vorwärts, wenn nicht deaktiviert in CV49
+        if ((cv_pb0_cfg & 0x80) == 0) {                                                                               // CV49-Bit7 = 1 schaltet für PB0 die Richtungserkennung aus
+          if ((((cv29_byte & 0x01) == 0) && ((cv_pb0_cfg & 0x40) == 0)) || (((cv29_byte & 0x01) == 1) && ((cv_pb0_cfg & 0x20) == 0))) {   // Bei Richtungs-Invertierung auch die Richtungs-Bits in CV49 wechseln
+           analogWrite(LF_PIN, (richtung && ((FuncState & FN_BIT_00) >> 4)) * cv_pb0_dim);                             // PB0 bei F0 in Fahrrichtung vorwärts, wenn nicht deaktiviert in CV49
           }
         } else {
-          digitalWrite(LF_PIN, (FuncState & FN_BIT_00) >> 4);                                           // PB0 bei F0 in beiden Fahrtrichtungen
+          analogWrite(LF_PIN, ((FuncState & FN_BIT_00) >> 4) * cv_pb0_dim);                                           // PB0 bei F0 in beiden Fahrtrichtungen
         }
-        if ((cv50_pb4_cfg & 0x80) == 0) {                                                                // CV50-Bit7 = 1 schaltet für PB4 die Richtungserkennung aus
-          if ((((cv29_byte & 0x01) == 0) && ((cv50_pb4_cfg & 0x20) == 0)) || (((cv29_byte & 0x01) == 1) && ((cv50_pb4_cfg & 0x40) == 0))) {   // Bei Richtungs-Invertierung auch die Richtungs-Bits in CV50 wechseln
-            if (cv33_f0f_map & 0x02) digitalWrite(LR_PIN, !richtung && (FuncState & FN_BIT_00) >> 4);   // PB4 bei F0-F in Fahrrichtung rückwärts, wenn nicht deaktiviert in CV50
-            if (cv34_f0r_map & 0x02) digitalWrite(LR_PIN, !richtung && (FuncState & FN_BIT_00) >> 4);   // PB4 bei F0-R in Fahrrichtung rückwärts, wenn nicht deaktiviert in CV50
-            if (cv35_f1map & 0x02) digitalWrite(LR_PIN, !richtung && (FuncState & FN_BIT_01));          // PB4 bei F1 in Fahrrichtung rückwärts, wenn nicht deaktiviert in CV50
-            if (cv36_f2map & 0x02) digitalWrite(LR_PIN, !richtung && (FuncState & FN_BIT_02) >> 1);     // PB4 bei F2 in Fahrrichtung rückwärts, wenn nicht deaktiviert in CV50
-            if (cv37_f3map & 0x02) digitalWrite(LR_PIN, !richtung && (FuncState & FN_BIT_03) >> 2);     // PB4 bei F3 in Fahrrichtung rückwärts, wenn nicht deaktiviert in CV50
-            if (cv38_f4map & 0x40) digitalWrite(LR_PIN, !richtung && (FuncState & FN_BIT_04) >> 3);     // PB4 bei F4 in Fahrrichtung rückwärts, wenn nicht deaktiviert in CV50
+        if ((cv_pb4_cfg & 0x80) == 0) {                                                                // CV50-Bit7 = 1 schaltet für PB4 die Richtungserkennung aus
+          if ((((cv29_byte & 0x01) == 0) && ((cv_pb4_cfg & 0x20) == 0)) || (((cv29_byte & 0x01) == 1) && ((cv_pb4_cfg & 0x40) == 0))) {   // Bei Richtungs-Invertierung auch die Richtungs-Bits in CV50 wechseln
+            if (cv33_f0f_map & 0x02) analogWrite(LR_PIN, (!richtung && ((FuncState & FN_BIT_00) >> 4)) * cv_pb4_dim);   // PB4 bei F0-F in Fahrrichtung rückwärts, wenn nicht deaktiviert in CV50
+            if (cv34_f0r_map & 0x02) analogWrite(LR_PIN, (!richtung && ((FuncState & FN_BIT_00) >> 4)) * cv_pb4_dim);   // PB4 bei F0-R in Fahrrichtung rückwärts, wenn nicht deaktiviert in CV50
+            if (cv35_f1map & 0x02) analogWrite(LR_PIN, (!richtung && (FuncState & FN_BIT_01)) * cv_pb4_dim);          // PB4 bei F1 in Fahrrichtung rückwärts, wenn nicht deaktiviert in CV50
+            if (cv36_f2map & 0x02) analogWrite(LR_PIN, (!richtung && ((FuncState & FN_BIT_02) >> 1)) * cv_pb4_dim);     // PB4 bei F2 in Fahrrichtung rückwärts, wenn nicht deaktiviert in CV50
+            if (cv37_f3map & 0x02) analogWrite(LR_PIN, (!richtung && ((FuncState & FN_BIT_03) >> 2)) * cv_pb4_dim);     // PB4 bei F3 in Fahrrichtung rückwärts, wenn nicht deaktiviert in CV50
+            if (cv38_f4map & 0x40) analogWrite(LR_PIN, (!richtung && ((FuncState & FN_BIT_04) >> 3)) * cv_pb4_dim);     // PB4 bei F4 in Fahrrichtung rückwärts, wenn nicht deaktiviert in CV50
           }
         } else {
-          if (cv33_f0f_map & 0x02) digitalWrite(LR_PIN, (FuncState & FN_BIT_00) >> 4);                  // PB4 bei F0-F in beiden Fahrtrichtungen
-          if (cv34_f0r_map & 0x02) digitalWrite(LR_PIN, (FuncState & FN_BIT_00) >> 4);                  // PB4 bei F0-R in beiden Fahrtrichtungen
-          if (cv35_f1map & 0x02) digitalWrite(LR_PIN, (FuncState & FN_BIT_01));                         // PB4 bei F1 in beiden Fahrtrichtungen
-          if (cv36_f2map & 0x02) digitalWrite(LR_PIN, (FuncState & FN_BIT_02) >> 1);                    // PB4 bei F2 in beiden Fahrtrichtungen
-          if (cv37_f3map & 0x02) digitalWrite(LR_PIN, (FuncState & FN_BIT_03) >> 2);                    // PB4 bei F3 in beiden Fahrtrichtungen
-          if (cv38_f4map & 0x40) digitalWrite(LR_PIN, (FuncState & FN_BIT_04) >> 3);                    // PB4 bei F4 in beiden Fahrtrichtungen
+          if (cv33_f0f_map & 0x02) analogWrite(LR_PIN, ((FuncState & FN_BIT_00) >> 4) * cv_pb4_dim);   // PB4 bei F0-F in beiden Fahrtrichtungen
+          if (cv34_f0r_map & 0x02) analogWrite(LR_PIN, ((FuncState & FN_BIT_00) >> 4) * cv_pb4_dim);   // PB4 bei F0-R in beiden Fahrtrichtungen
+          if (cv35_f1map & 0x02) analogWrite(LR_PIN, ((FuncState & FN_BIT_01)) * cv_pb4_dim);          // PB4 bei F1 in beiden Fahrtrichtungen
+          if (cv36_f2map & 0x02) analogWrite(LR_PIN, ((FuncState & FN_BIT_02) >> 1) * cv_pb4_dim);     // PB4 bei F2 in beiden Fahrtrichtungen
+          if (cv37_f3map & 0x02) analogWrite(LR_PIN, ((FuncState & FN_BIT_03) >> 2) * cv_pb4_dim);     // PB4 bei F3 in beiden Fahrtrichtungen
+          if (cv38_f4map & 0x40) analogWrite(LR_PIN, ((FuncState & FN_BIT_04) >> 3) * cv_pb4_dim);     // PB4 bei F4 in beiden Fahrtrichtungen
         }
 
-        if (cv33_f0f_map & 0x04) digitalWrite(LCAB_PIN, (FuncState & FN_BIT_00) >> 4);  // PB1 bei F0-F
-        if (cv34_f0r_map & 0x04) digitalWrite(LCAB_PIN, (FuncState & FN_BIT_00) >> 4);  // PB1 bei F0-R
-        if (cv35_f1map & 0x04) digitalWrite(LCAB_PIN, (FuncState & FN_BIT_01));         // PB1 bei F1
-        if (cv36_f2map & 0x04) digitalWrite(LCAB_PIN, (FuncState & FN_BIT_02) >> 1);    // PB1 bei F2
-        if (cv37_f3map & 0x04) digitalWrite(LCAB_PIN, (FuncState & FN_BIT_03) >> 2);    // PB1 bei F3
-        if (cv38_f4map & 0x80) digitalWrite(LCAB_PIN, (FuncState & FN_BIT_04) >> 3);    // PB1 bei F4
+        if (cv33_f0f_map & 0x04) analogWrite(LCAB_PIN, ((FuncState & FN_BIT_00) >> 4) * cv_pb1_dim);  // PB1 bei F0-F
+        if (cv34_f0r_map & 0x04) analogWrite(LCAB_PIN, ((FuncState & FN_BIT_00) >> 4) * cv_pb1_dim);  // PB1 bei F0-R
+        if (cv35_f1map & 0x04) analogWrite(LCAB_PIN, (FuncState & FN_BIT_01) * cv_pb1_dim);           // PB1 bei F1
+        if (cv36_f2map & 0x04) analogWrite(LCAB_PIN, ((FuncState & FN_BIT_02) >> 1) * cv_pb1_dim);    // PB1 bei F2
+        if (cv37_f3map & 0x04) analogWrite(LCAB_PIN, ((FuncState & FN_BIT_03) >> 2) * cv_pb1_dim);    // PB1 bei F3
+        if (cv38_f4map & 0x80) analogWrite(LCAB_PIN, ((FuncState & FN_BIT_04) >> 3) * cv_pb1_dim);    // PB1 bei F4
         break;
 
       case FN_5_8:
-        if (cv39_f5map & 0x80) digitalWrite(LCAB_PIN, (FuncState & FN_BIT_05));         // PB1 bei F5
-        if (cv40_f6map & 0x80) digitalWrite(LCAB_PIN, (FuncState & FN_BIT_06) >> 1);    // PB1 bei F6
-        if (cv41_f7map & 0x80) digitalWrite(LCAB_PIN, (FuncState & FN_BIT_07) >> 2);    // PB1 bei F7
-        if (cv42_f8map & 0x80) digitalWrite(LCAB_PIN, (FuncState & FN_BIT_08) >> 3);    // PB1 bei F8
+        if (cv39_f5map & 0x80) analogWrite(LCAB_PIN, ((FuncState & FN_BIT_05) * cv_pb1_dim));         // PB1 bei F5
+        if (cv40_f6map & 0x80) analogWrite(LCAB_PIN, ((FuncState & FN_BIT_06) >> 1) * cv_pb1_dim);    // PB1 bei F6
+        if (cv41_f7map & 0x80) analogWrite(LCAB_PIN, ((FuncState & FN_BIT_07) >> 2) * cv_pb1_dim);    // PB1 bei F7
+        if (cv42_f8map & 0x80) analogWrite(LCAB_PIN, ((FuncState & FN_BIT_08) >> 3) * cv_pb1_dim);    // PB1 bei F8
         break;
 
       case FN_9_12:
-        if (cv43_f9map & 0x10) digitalWrite(LCAB_PIN, (FuncState & FN_BIT_09));         // PB1 bei F9
-        if (cv44_f10map & 0x10) digitalWrite(LCAB_PIN, (FuncState & FN_BIT_10) >> 1);   // PB1 bei F10
-        if (cv45_f11map & 0x10) digitalWrite(LCAB_PIN, (FuncState & FN_BIT_11) >> 2);   // PB1 bei F11
-        if (cv46_f12map & 0x10) digitalWrite(LCAB_PIN, (FuncState & FN_BIT_12) >> 3);   // PB1 bei F12
+        if (cv43_f9map & 0x10) analogWrite(LCAB_PIN, ((FuncState & FN_BIT_09) * cv_pb1_dim));         // PB1 bei F9
+        if (cv44_f10map & 0x10) analogWrite(LCAB_PIN, ((FuncState & FN_BIT_10) >> 1) * cv_pb1_dim);   // PB1 bei F10
+        if (cv45_f11map & 0x10) analogWrite(LCAB_PIN, ((FuncState & FN_BIT_11) >> 2) * cv_pb1_dim);   // PB1 bei F11
+        if (cv46_f12map & 0x10) analogWrite(LCAB_PIN, ((FuncState & FN_BIT_12) >> 3) * cv_pb1_dim);   // PB1 bei F12
         break;
 
       case FN_13_20:
