@@ -29,6 +29,8 @@ Weiterhin wurden Zusatzkonfigurationen mit den folgenden CVs ergänzt:
   - Bit7=1 immer an
   - Bit6=1 aus, wenn vorwärts
   - Bit5=1 aus, wenn rückwärts
+- CV51, CV52, CV53 für Dimmung der Ausgänge PB0, PB1, PB4, default 15
+  - Bit0 ... Bit4 (0 ... 31), 0 wird auf 1 gesetzt
 
 
 
