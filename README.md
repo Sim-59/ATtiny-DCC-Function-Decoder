@@ -5,14 +5,15 @@ https://jo-fri.github.io/Eisenbahn/DCC_ATtiny85/index.html
 
 Der Sketch verwendet die [NmraDcc-Bibliothek](https://github.com/mrrwa/NmraDcc) von [MRRWA](http://mrrwa.org/), die über die Arduino-Bibliotheksverwaltung eingebunden werden kann.
 
-Zum Digispark-Board wurde eine kleine [Zusatzplatine](http://simandit.de/simwiki/doku.php?id=modellbahn:umbauten:dcc-dekoder#funktions-dekoder_mit_digispark-board) entwickelt, mit der die Anschaltung an das Gleissignal erfolgt. Dies enthält u.a. 3 Transistoren für die Funktionsausgänge, um z.B. die gleichgerichtete Gleisspannung zu schalten, und ein Transistor zur Erzeugung des ACK-Signals. Damit sind jedoch nur drei der in der Ursprungsversion verfügbaren vier Ausgänge nutzbar. 
+Zum Digispark-Board wurde von mir eine kleine [Zusatzplatine](http://simandit.de/simwiki/doku.php?id=modellbahn:umbauten:dcc-dekoder#funktions-dekoder_mit_digispark-board) entwickelt, mit der die Anschaltung an das Gleissignal erfolgt. Dies enthält weiterhin 3 Transistoren für die Funktionsausgänge, um z.B. die gleichgerichtete Gleisspannung zu schalten, und ein 4. Transistor zur Erzeugung des ACK-Signals. Damit sind jedoch nur noch drei der in der Ursprungsversion verfügbaren vier Ausgänge nutzbar. 
 
 ## Modifizierte Version
-Für den Einsatz in einer Lichtleiste als Ersatz für die vorhandene Beleuchtung in einem [Modellbahnwagen](https://simandit.de/simwiki/doku.php?id=modellbahn:umbauten:rekowagen) habe ich die Dekoder-Hardware mit auf die Beleuchtung gebracht. Der Wagen ist auf dem Programmiergleis konfigurierbar.   
-Auf der Beleuchtungsplatine ist ein Steckverbinder für einen ISP-Programmer vorhanden, damit kann auf den Bootloader wie beim Digispark-Board verzichtet werden.  
+Für den Einsatz in einer LED-Lichtleiste als Ersatz für die vorhandene Beleuchtung mit zwei Birnchen in einem [Modellbahnwagen](https://simandit.de/simwiki/doku.php?id=modellbahn:umbauten:rekowagen) habe ich die Dekoder-Hardware mit auf die Beleuchtungsplatine gebracht. Der Wagen ist auf dem Programmiergleis konfigurierbar.   
+Auf der Beleuchtungsplatine ist ein Steckverbinder für einen ISP-Programmer vorhanden, damit kann auf den Bootloader wie beim Digispark-Board verzichtet werden, was Speicherplatz und Bootzeit spart.
 
 Folgende Funktionen sind möglich:
 - F0 schaltet richtungsabhängig PB0 und PB4 (z.B. Schlusslichter beider Seiten)
+  - PB4 kann auf eine andere Funktionstaste gemappt und damit einzeln geschaltet werden
 - F1 schaltet PB1 (z.B. Innenraumbeleuchtung)
 
 Weiterhin wurden Zusatzkonfigurationen mit den folgenden CVs ergänzt:  
