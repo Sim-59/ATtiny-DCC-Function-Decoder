@@ -22,8 +22,8 @@ Weiterhin wurden Zusatzkonfigurationen mit den folgenden CVs ergänzt:
 - CV29 Konfigurationsbyte, default 2
   - Bit0=1 Richtungsumkehr
 - CV33-CV46 Funktionsmapping für Innenbeleuchtung F0-F12
-  - CV33 default 1, F0-Vorwärts steuert PB0 (Schlusslicht Vorwärtsfahrt)
-  - CV34 default 2, F0-Rückwärts steuert PB4 (Schlusslicht Rückwärtsfahrt), Mapping auf F1 ... F4 möglich
+  - CV33 default 1, F0-Vorwärts steuert PB0 (Ausgang Vorwärtsfahrt)
+  - CV34 default 2, F0-Rückwärts steuert PB4 (Ausgang Rückwärtsfahrt), Mapping auf F1 ... F4 möglich
   - CV35 default 4, F1 steuert PB1 (Innenbeleuchtung), Mapping auf F0 ... F12 möglich
 - CV49, CV50 für Steuerung der Schlussbeleuchtung
   - Bit7=1 immer an
