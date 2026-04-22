@@ -11,6 +11,8 @@ Zum Digispark-Board wurde von mir eine kleine [Zusatzplatine](http://simandit.de
 Für den Einsatz in einer LED-Lichtleiste als Ersatz für die vorhandene Beleuchtung mit zwei Birnchen in einem [Modellbahnwagen](https://simandit.de/simwiki/doku.php?id=modellbahn:umbauten:rekowagen) habe ich die Dekoder-Hardware mit auf die Beleuchtungsplatine gebracht. Der Wagen ist auf dem Programmiergleis konfigurierbar.   
 Auf der Beleuchtungsplatine ist ein Steckverbinder für einen ISP-Programmer vorhanden, damit kann auf den Bootloader wie beim Digispark-Board verzichtet werden, was Speicherplatz und Bootzeit spart.
 
+Einen Dekoder mit dem Digispark-Board und der Zusatzplatine habe ich in einem [Packwagen](https://simandit.de/simwiki/doku.php?id=modellbahn:umbauten:pwg-daa) eingebaut.
+
 Folgende Funktionen sind möglich:
 - F0 schaltet richtungsabhängig PB0 und PB4 (z.B. Schlusslichter beider Seiten)
   - PB4 kann auf eine andere Funktionstaste gemappt und damit einzeln geschaltet werden
