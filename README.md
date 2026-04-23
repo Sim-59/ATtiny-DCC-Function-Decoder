@@ -43,7 +43,7 @@ Jetzt sind folgenden Konfigurationsvariablen (CVs) sind vorhanden:
 Wenn auf das ACK-Signal zum Lesen der Konfigurationsvariablen verzichtet oder dieses zeitweilig mit einem Jumper/Schalter aktiviert werden kann, dann kann auch der Port PB3 als AUX2 genutzt werden. Die dafür gewählte Schaltung liegt im Ordner "hardware". 
 
 Dieser 4. Port ist aber nicht dimmbar, PWM unterstützt der ATtiny85 an PB3 nicht.  
-Alle anderen Funktionen sind weiterhin verfügbar, auch ein Funktionsmapping für AUX2 ist mit dem trotz vorhandenen Bootloader verbliebenen Speicherplatz geradeso möglich geworden.  
+Alle anderen Funktionen sind weiterhin verfügbar, auch ein Funktionsmapping für AUX2 ist mit dem verbliebenen Speicherplatz trotz vorhandenen micronucleus-Bootloader geradeso möglich geworden.  
 - F2 schaltet AUX2 (default), Funktionsmapping mit CV36 (default 8)
 
 Ich nutze aber nur die Variante ohne Bootloader mit ISP-Programmierung.
