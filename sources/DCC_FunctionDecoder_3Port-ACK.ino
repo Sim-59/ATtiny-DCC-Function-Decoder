@@ -1,11 +1,11 @@
-//  Ergänzungen - basierend auf unten veröffentlichtem Sketch                           MiHo 2026-04-22
+//  Ergänzungen - basierend auf unten veröffentlichtem Sketch                           MiHo 2026-04-23
 //  https://simandit.de/simwiki/doku.php?id=modellbahn:umbauten:dcc-dekoder
-//  ACK-Rückmeldung für CV-Programmierung/CV-Lesen (PT) Hardware/Funktion hinzugefügt
-//  Funktion F2 an PB3 entfällt dafür
-//  Die Funktionstasten steuern die Ausgänge PB0, PB1, PB4 
-//  F0 schaltet richtungsabhängig die Schlusslichter (Richtung konfigurierbar mit CV29) 
-//  Schlusslicht rückwärts kann mit Funktionsmapping von F0-R auf F1 ... F4 gelegt werden
-//  Innenbeleuchtung kann mit Funktionsmapping auf F0 ... F12 gelegt werden
+//  ACK-Rückmeldung für CV-Lesen am Programmiergleis (PT) Hardware/Funktion hinzugefügt
+//  ehemalige Funktion F2 an PB3 entfällt dafür
+//  Die Funktionstasten steuern die Ausgänge PB0 (LV), PB4 (LR), PB1 (AUX1)
+//  F0 schaltet richtungsabhängig PB0 (LV) und PB4 (LR) z.B. Schlusslichter (Richtung konfigurierbar mit CV29) 
+//  Funktionsmapping von PB4 (LR) auf F1 ... F4
+//  Funktionsmapping vom PB1 (AUX1) auf F0 ... F12
 //  Ausgänge können gedimmt werden
 //
 //  CV1 = Dekoder-Adresse, default 3
@@ -15,18 +15,18 @@
 //    Bit0 = 1 (1) dreht die Fahrtrichtung um
 //    Bit5 = 1 (64) aktiviert erweiterte Adressierung mit CV17/CV18
 //  CV33-CV46 Funktionsmapping für Innenbeleuchtung F0-F12
-//      CV33 default 1, F0-Vorwärts steuert PB0 (Schlusslicht Vorwärtsfahrt)
-//      CV34 default 2, F0-Rückwärts steuert PB4 (Schlusslicht Rückwärtsfahrt)
-//      CV35 default 4, F1 steuert PB1 (Innenbeleuchtung)
-//  CV49, CV50 für Steuerung der Schlussbeleuchtung
+//      CV33 default 1, F0-Vorwärts steuert PB0 (LV bzw. LF, z.B Schlusslicht Vorwärtsfahrt)
+//      CV34 default 2, F0-Rückwärts steuert PB4 (LR, z.B. Schlusslicht Rückwärtsfahrt)
+//      CV35 default 4, F1 steuert PB1 (AUX1, z.B. Innenbeleuchtung)
+//  CV49, CV50 für Steuerung von LV, LR 
 //      Bit7=1 immer an
 //      Bit6=1 aus, wenn vorwärts
 //      Bit5=1 aus, wenn rückwärts
-//  CV51, CV52, CV53 Dimmwert, default 15
+//  CV51, CV52, CV53 Dimmwert für LV, LR, AUX1, default 15
 //      Bit0 ... Bit4  (0 ... 31) 1=dunkel bis 31=volle Helligkeit, 0 wird auf 1 gesetzt
 //
 //  Erst-Initialisierung bei unprogrammiertem EEPROM
-//  -----------------
+//  --------------------------------------------------------------------------------------------
 //
 //  Ausgangs-Idee - Arduino Digispark ATtiny85                                  JoFri 2024-08-12
 //  https://jo-fri.github.io/Eisenbahn/DCC_ATtiny85/
