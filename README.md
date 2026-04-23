@@ -14,9 +14,9 @@ Auf der Beleuchtungsplatine ist ein Steckverbinder für einen ISP-Programmer vor
 Einen Dekoder mit dem Digispark-Board und der Zusatzplatine habe ich in einem [Packwagen](https://simandit.de/simwiki/doku.php?id=modellbahn:umbauten:pwg-daa) eingebaut.
 
 Folgende Funktionen sind möglich:
-- F0 schaltet richtungsabhängig PB0 und PB4 (z.B. Schlusslichter beider Seiten)
-  - PB4 kann auf eine andere Funktionstaste gemappt und damit einzeln geschaltet werden
-- F1 schaltet PB1 (z.B. Innenraumbeleuchtung)
+- F0 schaltet richtungsabhängig PB0 (LV) und PB4 (LR), z.B. Schlusslichter beider Seiten
+  - PB4 (LR) kann auf eine andere Funktionstaste gemappt und damit einzeln geschaltet werden
+- F1 schaltet PB1 (AUX1), z.B. Innenraumbeleuchtung
 
 Jetzt sind folgenden Konfigurationsvariablen (CVs) sind vorhanden:  
 - CV1 DCC-Adresse, default 3 
@@ -28,16 +28,22 @@ Jetzt sind folgenden Konfigurationsvariablen (CVs) sind vorhanden:
   - Bit0=1 Richtungsumkehr
   - Bit1=1 28/128 Fahrstufen (default
   - Bit5=1 erweiterte Adresse nutzen
-- CV33-CV46 Funktionsmapping für Innenbeleuchtung F0-F12
-  - CV33 default 1, F0-Vorwärts steuert PB0 (Ausgang Vorwärtsfahrt)
-  - CV34 default 2, F0-Rückwärts steuert PB4 (Ausgang Rückwärtsfahrt), Mapping auf F1 ... F4 möglich
-  - CV35 default 4, F1 steuert PB1 (Innenbeleuchtung), Mapping auf F0 ... F12 möglich
+- CV33-CV46 Funktionsmapping für PB0 (LV), PB4 (LR), PB1 (AUX1)
+  - CV33 default 1, F0-Vorwärts steuert PB0 (LV, Ausgang Vorwärtsfahrt)
+  - CV34 default 2, F0-Rückwärts steuert PB4 (LR, Ausgang Rückwärtsfahrt), Mapping auf F1 ... F4 möglich
+  - CV35 default 4, F1 steuert PB1 (AUX1, z.B. Innenbeleuchtung), Mapping auf F0 ... F12 möglich
 - CV49, CV50 für Steuerung der Ausgänge PB0 und PB4 (Schlussbeleuchtung)
   - Bit7=1 immer an
   - Bit6=1 aus, wenn vorwärts
-  - Bit5=1 aus, wenn rückwärts
+   - Bit5=1 aus, wenn rückwärts
 - CV51, CV52, CV53 für Dimmung der Ausgänge PB0, PB1, PB4
   - Bit0 ... Bit4 (0 ... 31), 0 wird auf 1 gesetzt
 
+## Option 4 Ausgänge
+Wenn auf das ACK-Signal zum Lesen der Konfigurationsvariablen verzichtet oder dieses zeitweilig mit einem Jumper/Schalter aktiviert werden kann, dann kann auch der Port PB3 als AUX2 genutzt werden. Die dafür gewählte Schaltung liegt im Ordner "hardware".  
+Dieser 4. Port ist aber nicht dimmbar, PWM unterstützt der ATtiny85 an PB3 nicht.  
+Alle anderen Funktionen sind weiterhin verfügbar, auch ein Funktionsmapping für AUX2 ist mit dem trotz vorhandenen Bootloader verbliebenen Speicherplatz geradeso möglich.  
+- F2 schaltet AUX2 (default), Funktionsmapping mit CV36 (default 8)
 
+Ich nutze aber nur die Variante ohne Bootloader mit ISP-Programmierung.
 
