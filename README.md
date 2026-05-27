@@ -46,5 +46,5 @@ Dieser 4. Port ist aber nicht dimmbar, PWM unterstützt der ATtiny85 an PB3 nich
 Alle anderen Funktionen sind weiterhin verfügbar, auch ein Funktionsmapping für AUX2 ist mit dem verbliebenen Speicherplatz trotz vorhandenen micronucleus-Bootloader geradeso möglich geworden.  
 - F2 schaltet AUX2 (default), Funktionsmapping mit CV36 (default 8)
 
-Ich nutze aber nur die Variante ohne Bootloader mit ISP-Programmierung.
-
+Ich nutze aber nur die Variante ohne Bootloader mit ISP-Programmierung.\
+Eine gute Informationsquelle zur Programmierung des ATtiny85 ist [hier](https://wolles-elektronikkiste.de/attiny85-84-45-44-25-24-programmieren) zu finden.
