@@ -42,9 +42,10 @@ Jetzt sind folgenden Konfigurationsvariablen (CVs) sind vorhanden:
 ## Option 4 Ausgänge
 Wenn auf das ACK-Signal zum Lesen der Konfigurationsvariablen verzichtet oder dieses zeitweilig mit einem Jumper/Schalter aktiviert werden kann, dann kann auch der Port PB3 als AUX2 genutzt werden. Die dafür gewählte Schaltung liegt im Ordner "hardware". 
 
-Dieser 4. Port ist aber nicht dimmbar, PWM unterstützt der ATtiny85 an PB3 nicht.  
-Alle anderen Funktionen sind weiterhin verfügbar, auch ein Funktionsmapping für AUX2 ist mit dem verbliebenen Speicherplatz trotz vorhandenen micronucleus-Bootloader geradeso möglich geworden.  
+Dieser 4. Port ist aber nicht dimmbar, PWM unterstützt der ATtiny85 an PB3 nicht.
 - F2 schaltet AUX2 (default), Funktionsmapping mit CV36 (default 8)
 
-Ich nutze aber nur die Variante ohne Bootloader mit ISP-Programmierung.\
+Ich nutze aber nur die Variante ohne Bootloader mit ISP-Programmierung. Ich habe teilweise Konflikte mit dem Bootloader festgestellt, die den Chip resetten und der Bootloader muss neu aufgespielt werden.\
+Die Hardware ohne das Digispark-Board hat für die ISP-Programmierung 6 Kontakteflächen.
+
 Eine gute Informationsquelle zur Programmierung des ATtiny85 ist [hier](https://wolles-elektronikkiste.de/attiny85-84-45-44-25-24-programmieren) zu finden.
