@@ -46,6 +46,8 @@ Dieser 4. Port ist aber nicht dimmbar, PWM unterstützt der ATtiny85 an PB3 nich
 - F2 schaltet AUX2 (default), Funktionsmapping mit CV36 (default 8)
 
 Ich nutze aber nur die Variante ohne Bootloader mit ISP-Programmierung. Ich habe teilweise Konflikte mit dem Bootloader festgestellt, die den Chip resetten und der Bootloader muss neu aufgespielt werden.\
-Die Hardware ohne das Digispark-Board hat für die ISP-Programmierung 6 Kontakteflächen.
+Die Dekoder-Hardware ohne das Digispark-Board hat für die ISP-Programmierung 6 Kontakteflächen.
+
+Die 4-Port-Hardware kann auch für die Software der 3-Port-Variante verwendet werden. Dazu ist der Anschluss ACK zu überbrücken, der letze Ausgang ist nicht verwendbar. 
 
 Eine gute Informationsquelle zur Programmierung des ATtiny85 ist [hier](https://wolles-elektronikkiste.de/attiny85-84-45-44-25-24-programmieren) zu finden.
