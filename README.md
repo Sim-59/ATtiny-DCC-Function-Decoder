@@ -50,4 +50,4 @@ Die Dekoder-Hardware ohne das Digispark-Board hat für die ISP-Programmierung 6 
 
 Die 4-Port-Hardware kann auch für die Software der 3-Port-Variante verwendet werden. Dazu ist der Anschluss ACK zu überbrücken, der letze Ausgang ist nicht verwendbar. 
 
-Eine gute Informationsquelle zur Programmierung des ATtiny85 ist [hier](https://wolles-elektronikkiste.de/attiny85-84-45-44-25-24-programmieren) zu finden.
+Eine gute Informationsquelle zur Programmierung des ATtiny85 ist [hier](https://wolles-elektronikkiste.de/attiny-mit-arduino-code-programmieren) zu finden.
