@@ -42,6 +42,8 @@ Jetzt sind folgenden Konfigurationsvariablen (CVs) sind vorhanden:
 ## Option 4 Ausgänge
 Wenn auf das ACK-Signal zum Lesen der Konfigurationsvariablen verzichtet oder dieses zeitweilig mit einem Jumper/Schalter aktiviert werden kann, dann kann auch der Port PB3 als AUX2 genutzt werden. Die dafür gewählte Schaltung liegt im Ordner "hardware". 
 
+Für die 4-Port-Variante wurde auch eine komplette Leiterplatte mit dem ATtiny85 entwickelt. Diese Baugruppe hat kein USB-Anschluss und muss mit einem ISP-Programmer programmiert werden.
+
 Dieser 4. Port ist aber nicht dimmbar, PWM unterstützt der ATtiny85 an PB3 nicht.
 - F2 schaltet AUX2 (default), Funktionsmapping mit CV36 (default 8)
 
