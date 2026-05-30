@@ -1,14 +1,15 @@
 # DCC-Funktionsdekoder mit ATtiny85 
 ## Ursprungs-Version
-Die Dekoder-Software für die Arduino wurde abgeleitet von einem Sketch, der für ein kleines Digispark-Board mit ATtiny85 entworfen wurde.\
-https://jo-fri.github.io/Eisenbahn/DCC_ATtiny85/index.html
+Die erste Dekoder-Software für die Arduino wurde abgeleitet von einem Sketch, der für ein kleines Digispark-Board mit ATtiny85 entworfen wurde.\
+https://jo-fri.github.io/Eisenbahn/DCC_ATtiny85/index.html\
+Die feste Adressierung und Konfiguration wurde geändert auf die Nutzung von CVs.
 
 Der Sketch verwendet die [NmraDcc-Bibliothek](https://github.com/mrrwa/NmraDcc) von [MRRWA](http://mrrwa.org/), die über die Arduino-Bibliotheksverwaltung eingebunden werden kann.
 
 Zum Digispark-Board wurde von mir eine kleine [Zusatzplatine](http://simandit.de/simwiki/doku.php?id=modellbahn:umbauten:dcc-dekoder#funktions-dekoder_mit_digispark-board) entwickelt, mit der die Anschaltung an das Gleissignal erfolgt. Dies enthält weiterhin 3 Transistoren für die Funktionsausgänge, um z.B. die gleichgerichtete Gleisspannung zu schalten, und ein 4. Transistor zur Erzeugung des ACK-Signals. Damit sind jedoch nur noch drei der in der Ursprungsversion verfügbaren vier Ausgänge nutzbar. 
 
 ## Modifizierte Version
-Für den Einsatz in einer LED-Lichtleiste als Ersatz für die vorhandene Beleuchtung mit zwei Birnchen in vierachsigen [PIKO-DR-Rekowagen](https://simandit.de/simwiki/doku.php?id=modellbahn:umbauten:rekowagen) habe ich die Dekoder-Hardware mit auf die Beleuchtungsplatine gebracht. Die Wagen sind jetzt auf dem Programmiergleis konfigurierbar.   
+Für den Einsatz in einer LED-Lichtleiste als Ersatz für die vorhandene Beleuchtung mit zwei Birnchen in vierachsigen [PIKO-DR-Rekowagen](https://simandit.de/simwiki/doku.php?id=modellbahn:umbauten:rekowagen) habe ich die Dekoder-Hardware mit auf die Beleuchtungsplatine gebracht. Die Wagen sind jetzt auf dem Programmiergleis konfigurierbar. Die Beleuchtung ist jetzt auch dimmbar.\
 Auf der Beleuchtungsplatine ist ein Steckverbinder für einen ISP-Programmer vorhanden, damit kann auf den Bootloader wie beim Digispark-Board verzichtet werden, was Speicherplatz und Bootzeit spart.
 
 Einen Dekoder mit dem Digispark-Board und der Zusatzplatine habe ich in einem [Packwagen](https://simandit.de/simwiki/doku.php?id=modellbahn:umbauten:pwg-daa) eingebaut.
