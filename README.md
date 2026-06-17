@@ -43,10 +43,11 @@ Jetzt sind folgenden Konfigurationsvariablen (CVs) sind vorhanden:
 ## Option 4 Ausgänge
 Wenn auf das ACK-Signal zum Lesen der Konfigurationsvariablen verzichtet oder dieses zeitweilig mit einem Jumper/Schalter aktiviert werden kann, dann kann auch der Port PB3 als AUX2 genutzt werden. Die dafür gewählte Schaltung liegt im Ordner "hardware". 
 
-Für die 4-Port-Variante wurde auch eine komplette Leiterplatte mit dem ATtiny85 entwickelt. Diese Baugruppe hat kein USB-Anschluss und muss mit einem ISP-Programmer programmiert werden.
+Für die 4-Port-Variante wurde auch eine [komplette Leiterplatte](https://simandit.de/simwiki/doku.php?id=modellbahn:umbauten:dcc-dekoder#multi-funktions-dekoder_4-port) mit dem ATtiny85 entwickelt. Diese Baugruppe hat kein USB-Anschluss und muss mit einem ISP-Programmer programmiert werden.
 
-Dieser 4. Port ist aber nicht dimmbar, PWM unterstützt der ATtiny85 an PB3 nicht.
+Dieser 4. Port ist nicht über PWM nicht dimmbar, das unterstützt der ATtiny85 an PB3 nicht. Es wurde aber eine Softwar-Dimmung in der loop-Funktion realisiert.
 - F2 schaltet AUX2 (default), Funktionsmapping mit CV36 (default 8)
+- CV54 ist für die Dimmung
 
 Ich nutze aber nur die Variante ohne Bootloader mit ISP-Programmierung. Ich habe teilweise Konflikte mit dem Bootloader festgestellt, die den Chip resetten und der Bootloader muss neu aufgespielt werden.\
 Die Dekoder-Hardware ohne das Digispark-Board hat für die ISP-Programmierung 6 Kontakteflächen.
