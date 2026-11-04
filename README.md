@@ -1,6 +1,7 @@
 # DCC-Funktionsdekoder mit ATtiny85 
 ## Ursprungs-Version
-![description](https://github.com/Sim-59/ATtiny-DCC-Function-Decoder/blob/main/images/DCC-MuFu4P_Text_k.png)
+
+![description](https://github.com/Sim-59/ATtiny-DCC-Function-Decoder/blob/main/images/ATtiny-MuFu3P_k.jpg))
 
 Die erste Dekoder-Software auf Arduino-Basis wurde abgeleitet von einem Sketch, der für ein kleines Digispark-Board mit ATtiny85 [hier](https://jo-fri.github.io/Eisenbahn/DCC_ATtiny85/index.html)  entworfen wurde.\
 Die feste Adressierung und Konfiguration wurde geändert auf die Nutzung von CVs.
@@ -42,6 +43,8 @@ Jetzt sind folgenden Konfigurationsvariablen (CVs) sind vorhanden:
   - Bit0 ... Bit4 (0 ... 31), 0 wird auf 1 gesetzt
 
 ## Option 4 Ausgänge
+![description](https://github.com/Sim-59/ATtiny-DCC-Function-Decoder/blob/main/images/DCC-MuFu4P_Text_k.png)
+
 Wenn auf das ACK-Signal zum Lesen der Konfigurationsvariablen verzichtet oder dieses zeitweilig mit einem Jumper/Schalter aktiviert werden kann, dann kann auch der Port PB3 als AUX2 genutzt werden. Die dafür gewählte Schaltung liegt im Ordner "hardware". 
 
 Für die 4-Port-Variante wurde auch eine [komplette Leiterplatte](https://simandit.de/simwiki/doku.php?id=modellbahn:umbauten:dcc-dekoder#multi-funktions-dekoder_4-port) mit dem ATtiny85 entwickelt. Diese Baugruppe hat keinen USB-Anschluss und muss mit einem ISP-Programmer programmiert werden.
