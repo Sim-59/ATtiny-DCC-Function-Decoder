@@ -1,5 +1,6 @@
 # DCC-Funktionsdekoder mit ATtiny85 
 ## Ursprungs-Version
+![description](https://github.com/Sim-59/ATtiny-DCC-Function-Decoder/blob/main/images/DCC-MuFu4P_Text_k.png)
 Die erste Dekoder-Software auf Arduino-Basis wurde abgeleitet von einem Sketch, der für ein kleines Digispark-Board mit ATtiny85 [hier](https://jo-fri.github.io/Eisenbahn/DCC_ATtiny85/index.html)  entworfen wurde.\
 Die feste Adressierung und Konfiguration wurde geändert auf die Nutzung von CVs.
 
