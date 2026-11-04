@@ -49,6 +49,8 @@ Wenn auf das ACK-Signal zum Lesen der Konfigurationsvariablen verzichtet oder di
 
 Für die 4-Port-Variante wurde auch eine [komplette Leiterplatte](https://simandit.de/simwiki/doku.php?id=modellbahn:umbauten:dcc-dekoder#multi-funktions-dekoder_4-port) mit dem ATtiny85 entwickelt. Diese Baugruppe hat keinen USB-Anschluss und muss mit einem ISP-Programmer programmiert werden.
 
+![description](https://github.com/Sim-59/ATtiny-DCC-Function-Decoder/blob/main/images/MuFuDec_Text_Func_k.jpg)
+
 Dieser 4. Port ist nicht über PWM nicht dimmbar, das unterstützt der ATtiny85 an PB3 nicht. Es wurde aber eine Softwar-Dimmung in der loop-Funktion realisiert.
 - F2 schaltet AUX2 (default), Funktionsmapping mit CV36 (default 8)
 - CV54 ist für die Dimmung
