@@ -43,10 +43,12 @@ Jetzt sind folgenden Konfigurationsvariablen (CVs) sind vorhanden:
   - Bit0 ... Bit4 (0 ... 31), 0 wird auf 1 gesetzt
 
 ## Option 4 Ausgänge
+### Zusatzplatine
 ![description](https://github.com/Sim-59/ATtiny-DCC-Function-Decoder/blob/main/images/DCC-MuFu4P_Text_k.png)
 
 Wenn auf das ACK-Signal zum Lesen der Konfigurationsvariablen verzichtet oder dieses zeitweilig mit einem Jumper/Schalter aktiviert werden kann, dann kann auch der Port PB3 als AUX2 genutzt werden. Die dafür gewählte Schaltung liegt im Ordner "hardware". 
 
+### Komplette Decoderplatine
 Für die 4-Port-Variante wurde auch eine [komplette Leiterplatte](https://simandit.de/simwiki/doku.php?id=modellbahn:umbauten:dcc-dekoder#multi-funktions-dekoder_4-port) mit dem ATtiny85 entwickelt. Diese Baugruppe hat keinen USB-Anschluss und muss mit einem ISP-Programmer programmiert werden.
 
 ![description](https://github.com/Sim-59/ATtiny-DCC-Function-Decoder/blob/main/images/MuFuDec_Text_Func_k.jpg)
