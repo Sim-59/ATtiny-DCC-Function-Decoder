@@ -18,11 +18,11 @@ Der Sketch verwendet die [NmraDcc-Bibliothek](https://github.com/mrrwa/NmraDcc) 
 
 Zum Digispark-Board wurde von mir eine kleine [Zusatzplatine](http://simandit.de/simwiki/doku.php?id=modellbahn:umbauten:dcc-dekoder#funktions-dekoder_mit_digispark-board) entwickelt, mit der die Anschaltung an das Gleissignal erfolgt. Diese enthält weiterhin 3 Transistoren für die Funktionsausgänge, um z.B. die gleichgerichtete Gleisspannung zu schalten, und einen 4. Transistor zur Erzeugung des ACK-Signals. Damit sind jedoch nur noch drei der in der Ursprungsversion verfügbaren vier Ausgänge nutzbar. 
 
-## Modifizierte Version
-Für den Einsatz in einer LED-Lichtleiste als Ersatz für die vorhandene Beleuchtung mit zwei Birnchen in vierachsigen [PIKO-DR-Rekowagen](https://simandit.de/simwiki/doku.php?id=modellbahn:umbauten:rekowagen) habe ich die Dekoder-Hardware mit auf die Beleuchtungsplatine gebracht. Die Wagen sind jetzt auf dem Programmiergleis konfigurierbar. Die Beleuchtung ist jetzt auch dimmbar.\
-Auf der Beleuchtungsplatine ist ein Steckverbinder für einen ISP-Programmer vorhanden, damit kann auf den Bootloader wie beim Digispark-Board verzichtet werden, was Speicherplatz und Bootzeit spart.
+Solch einen Dekoder mit dem Digispark-Board und der Zusatzplatine habe ich in einem [Packwagen](https://simandit.de/simwiki/doku.php?id=modellbahn:umbauten:pwg-daa) eingebaut.
 
-Einen Dekoder mit dem Digispark-Board und der Zusatzplatine habe ich in einem [Packwagen](https://simandit.de/simwiki/doku.php?id=modellbahn:umbauten:pwg-daa) eingebaut.
+## Dekoder für Lichtleiste
+Für den Einsatz in einer LED-Lichtleiste als Ersatz für die vorhandene Beleuchtung mit zwei Birnchen in vierachsigen [PIKO-DR-Rekowagen](https://simandit.de/simwiki/doku.php?id=modellbahn:umbauten:rekowagen) habe ich die den ATtiny85 zusätzlich mit auf die Beleuchtungsplatine gebracht. Die USB-Funktionalität ist entfallen, ebenso der dafür verwendete Bootloader. Die Wagen sind jetzt auf dem Programmiergleis konfigurierbar. Die Beleuchtung ist dimmbar.\
+Auf der Beleuchtungsplatine ist ein Steckverbinder für einen ISP-Programmer vorhanden.
 
 Folgende Funktionen sind möglich:
 - F0 schaltet richtungsabhängig PB0 (LV) und PB4 (LR), z.B. Schlusslichter beider Seiten
@@ -50,7 +50,7 @@ Jetzt sind folgenden Konfigurationsvariablen (CVs) sind vorhanden:
 - CV51, CV52, CV53 für Dimmung der Ausgänge PB0, PB1, PB4
   - Bit0 ... Bit4 (0 ... 31), 0 wird auf 1 gesetzt
 
-## Option 4 Ausgänge
+## Erweiterung 4 Ausgänge
 ### Digispark-Zusatzplatine
 ![description](https://github.com/Sim-59/ATtiny-DCC-Function-Decoder/blob/main/images/DCC-MuFu4P_Text_k.png)
 
@@ -61,11 +61,11 @@ Für die 4-Port-Variante wurde auch eine [komplette Leiterplatte](https://simand
 
 ![description](https://github.com/Sim-59/ATtiny-DCC-Function-Decoder/blob/main/images/MuFuDec_Text_Func_k.jpg)
 
-Dieser 4. Port ist nicht über PWM nicht dimmbar, das unterstützt der ATtiny85 an PB3 nicht. Es wurde aber eine Softwar-Dimmung in der loop-Funktion realisiert.
+Dieser 4. Port ist nicht über PWM nicht dimmbar, das unterstützt der ATtiny85 an PB3 nicht. Es wurde aber eine Software-Dimmung in der loop-Funktion realisiert. Dafür sollte der ATtiny mit 16 MHz betrieben werden.
 - F2 schaltet AUX2 (default), Funktionsmapping mit CV36 (default 8)
 - CV54 ist für die Dimmung
 
-Ich nutze aber nur die Variante ohne Bootloader mit ISP-Programmierung. Ich habe teilweise Konflikte mit dem Bootloader festgestellt, die den Chip resetten und der Bootloader muss neu aufgespielt werden.\
+Es wird immer die Variante ohne Bootloader mit ISP-Programmierung verwendet. Ich habe teilweise Konflikte mit dem Bootloader festgestellt, die den Chip resetten und der Bootloader muss neu aufgespielt werden.\
 Die Dekoder-Hardware ohne das Digispark-Board hat für die ISP-Programmierung 6 Kontakteflächen.
 
 Die 4-Port-Hardware kann auch für die Software der 3-Port-Variante verwendet werden. Dazu ist der Anschluss ACK zu überbrücken, der letze Ausgang ist nicht verwendbar. 
