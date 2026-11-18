@@ -43,7 +43,7 @@ Jetzt sind folgenden Konfigurationsvariablen (CVs) sind vorhanden:
   - Bit0 ... Bit4 (0 ... 31), 0 wird auf 1 gesetzt
 
 ## Option 4 Ausgänge
-### Zusatzplatine
+### Digispark-Zusatzplatine
 ![description](https://github.com/Sim-59/ATtiny-DCC-Function-Decoder/blob/main/images/DCC-MuFu4P_Text_k.png)
 
 Wenn auf das ACK-Signal zum Lesen der Konfigurationsvariablen verzichtet oder dieses zeitweilig mit einem Jumper/Schalter aktiviert werden kann, dann kann auch der Port PB3 als AUX2 genutzt werden. Die dafür gewählte Schaltung liegt im Ordner "hardware". 
