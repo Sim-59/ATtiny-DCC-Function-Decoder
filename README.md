@@ -1,6 +1,6 @@
 # DCC-Funktionsdekoder mit ATtiny85 
 ## Überblick
-Der **DCC-Funktionsdekoder** dient der Ansteuerung von Funktionen z.B. in Eisenbahnwagen.
+Der **DCC-Funktionsdekoder** dient der Ansteuerung von z.B. Licht-Funktionen in Eisenbahnwagen. 
 ### Autor
 [Michael Hochmuth](https://github.com/Sim-59)
 ### Credits
