@@ -1,4 +1,12 @@
 # DCC-Funktionsdekoder mit ATtiny85 
+## Überblick
+Der **DCC-Funktionsdekoder** dient der Ansteuerung von Funktionen z.B. in Eisenbahnwagen.
+### Autor
+[Michael Hochmuth](https://github.com/Sim-59)
+### Credits
+* Verwendet wird die [NmraDCC Bibliothek für Arduino](http://mrrwa.org/) von MRRwA
+* Initiale Idee [Josef Fritsch](https://jo-fri.github.io/Eisenbahn/DCC_ATtiny85/index.html)
+
 ## Ursprungs-Version
 
 ![description](https://github.com/Sim-59/ATtiny-DCC-Function-Decoder/blob/main/images/ATtiny-MuFu3P_k.jpg)
@@ -61,5 +69,9 @@ Ich nutze aber nur die Variante ohne Bootloader mit ISP-Programmierung. Ich habe
 Die Dekoder-Hardware ohne das Digispark-Board hat für die ISP-Programmierung 6 Kontakteflächen.
 
 Die 4-Port-Hardware kann auch für die Software der 3-Port-Variante verwendet werden. Dazu ist der Anschluss ACK zu überbrücken, der letze Ausgang ist nicht verwendbar. 
+
+## Installation
+Die Platine wird in der Arduino-IDE mit einem ISP-Programmer programmiert. Dafür sind an einer Seite Kontaktflächen angeordnet. Als erstes wird ein Bootloader programmiert. Die Vorgehensweise ist auf dieser [Wiki-Seite](https://simandit.de/simwiki/doku.php?id=weiteres:arduino:bootloader#attiny85) beschrieben.
+Weitere Informationen sind in der Dokumentation beschrieben.
 
 Eine gute Informationsquelle zur Programmierung des ATtiny85 ist [hier](https://wolles-elektronikkiste.de/attiny-mit-arduino-code-programmieren) zu finden.
