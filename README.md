@@ -11,7 +11,7 @@ Der **DCC-Funktionsdekoder** dient der Ansteuerung von z.B. Licht-Funktionen in 
 
 ![description](https://github.com/Sim-59/ATtiny-DCC-Function-Decoder/blob/main/images/ATtiny-MuFu3P_k.jpg)
 
-Die erste Dekoder-Software auf Arduino-Basis wurde abgeleitet von einem Sketch, der für ein kleines Digispark-Board mit ATtiny85 [hier](https://jo-fri.github.io/Eisenbahn/DCC_ATtiny85/index.html)  entworfen wurde.\
+Die erste Dekoder-Software auf Arduino-Basis wurde abgeleitet von einem Sketch, der für ein kleines Digispark-Board mit ATtiny85 auf [Josefs Web-Seite](https://jo-fri.github.io/Eisenbahn/DCC_ATtiny85/index.html) entworfen wurde.\
 Die feste Adressierung und Konfiguration wurde geändert auf die Nutzung von CVs.
 
 Der Sketch verwendet die [NmraDcc-Bibliothek](https://github.com/mrrwa/NmraDcc) von [MRRWA](http://mrrwa.org/), die über die Arduino-Bibliotheksverwaltung eingebunden werden kann.
